@@ -1,12 +1,15 @@
 # ConicCore
 **Version:** 1.4.0  
 **Author:** SwarajDev  
-**API Version:** 1.21+  
-**Website:** [ConicCore on Modrinth](https://modrinth.com/plugin/conickits)  
+**API Version:** 1.21.x  
+**Modrinth:** [ConicCore on Modrinth](https://modrinth.com/plugin/conickits)  
+**SpigotMC:** [ConicCore on SpigotMC](https://www.spigotmc.org/resources/conic-core.127583/)  
 
-**Description:**  
 ConicCore is the core plugin for PracticePvP servers, providing **Kit**, **Party**, and **Duel** systems in one lightweight package. It includes arena management, stats tracking, AutoGG toggle, and is built for Paper 1.21+ with PlaceholderAPI support.
+1.4.0-DEV
 
+This is a inDev version of ConicCore, after fixing few things & adding Spawn Items, it will be officially released.
+If you find some bugs, report them as soon as possible.
 ---
 
 ## 📦 Features
