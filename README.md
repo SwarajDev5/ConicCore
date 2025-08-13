@@ -26,10 +26,10 @@ ConicCore is the core plugin for PracticePvP servers, providing **Kit**, **Party
 | Command | Aliases | Usage | Permission |
 |---------|---------|-------|------------|
 | `/coniccore` | `cc`, `conic` | Main admin command | `coniccore.admin` |
-| `/kit <create|delete|list|give>` | `kits`, `ck` | Kit management | `coniccore.kits` |
-| `/kiteditor <edit|save|leave|reset>` | — | Edit kits privately | *(No specific node listed)* |
-| `/arena <create|pos1|pos2|center|list|teleport|delete>` | — | Arena management | *(No specific node listed)* |
-| `/party <create|disband|invite|join|leave|kick|info|chat|fight>` | `p` | Party management | `coniccore.party.*` |
+| `/kit <create\|delete\|list\|give>` | `kits`, `ck` | Kit management | `coniccore.kit.*` |
+| `/kiteditor <edit\|save\|leave\|reset>` | — | Edit kits privately | *(No specific node listed)* |
+| `/arena <create\|pos1\|pos2\|center\|list\|teleport\|delete>` | — | Arena management | *(No specific node listed)* |
+| `/party <create\|disband\|invite\|join\|leave\|kick\|info\|chat\|fight>` | `p` | Party management | `coniccore.party.*` |
 | `/duel <player> <kit> <rounds>` | `1v1`, `battle`, `fight` | Duel another player | `coniccore.duel.*` |
 | `/spawn` | — | Teleport to spawn | `coniccore.spawn` |
 | `/stats [player]` | `statistic`, `statistics` | View player stats | `coniccore.stats` |
