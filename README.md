@@ -1,25 +1,25 @@
-# ConicCore
-**Version:** 1.4.0  
-**Author:** SwarajDev  
-**API Version:** 1.21.x  
-**Modrinth:** [ConicCore on Modrinth](https://modrinth.com/plugin/conickits)  
-**SpigotMC:** [ConicCore on SpigotMC](https://www.spigotmc.org/resources/conic-core.127583/)  
+# ConicDuels
+**Version:** 1.5.0-DEV
+**Author:** SwarajDev
+**API Version:** 1.21.x
+**Modrinth:** [ConicDuels on Modrinth](https://modrinth.com/plugin/conicduels)
+**SpigotMC:** [ConicDuels on SpigotMC](https://www.spigotmc.org/resources/conic-duels.127583/)
 
-ConicCore is the core plugin for PracticePvP servers, providing **Kit**, **Party**, and **Duel** systems in one lightweight package. It includes arena management, stats tracking, AutoGG toggle, and is built for Paper 1.21+ with PlaceholderAPI support.
-1.4.0-DEV
+ConicDuels is the core plugin for PracticePvP servers, providing **Kit**, **Party**, and **Duel** systems in one lightweight package. It includes auto-resetting arena management, stats tracking, AutoGG toggle, and is built for Paper 1.21+ with PlaceholderAPI and Hex color support.
 
-This is a inDev version of ConicCore, after fixing few things & adding Spawn Items, it will be officially released.
-If you find some bugs, report them as soon as possible.
+**ConicDuels 1.5.0-DEV build is buggy & not perfectly tested, please reach out github or discord to report bugs.**
 ---
 
 ## 📦 Features
-- Kit System (create, delete, list, give)
-- Party System (create, invite, kick, fight)
-- Duel System with kit & rounds
-- Arena management (create, set positions, teleport, delete)
+- Kit System (create, delete, list, give, layouts)
+- Reworked Party System (create, invite, kick, fight, admin tools)
+- Dedicated 1v1 Duels System with kit & rounds
+- **Auto Arena Reset System** integration (Requires ConicArena + FastAsyncWorldEdit/WorldEdit)
+- Arena management (create, set positions, teleport, delete, reset)
 - Player stats tracking
 - AutoGG toggle feature
 - Fully integrated with PlaceholderAPI
+- **Hex Color Code Support**
 - Lightweight & optimized for performance
 
 ---
@@ -28,16 +28,18 @@ If you find some bugs, report them as soon as possible.
 
 | Command | Aliases | Usage | Permission |
 |---------|---------|-------|------------|
-| `/coniccore` | `cc`, `conic` | Main admin command | `coniccore.admin` |
-| `/kit <create\|delete\|list\|give>` | `kits`, `ck` | Kit management | `coniccore.kit.*` |
-| `/kiteditor <edit\|save\|leave\|reset>` | — | Edit kits privately | *(No specific node listed)* |
-| `/arena <create\|pos1\|pos2\|center\|list\|teleport\|delete>` | — | Arena management | *(No specific node listed)* |
-| `/party <create\|disband\|invite\|join\|leave\|kick\|info\|chat\|fight>` | `p` | Party management | `coniccore.party.*` |
-| `/duel <player> <kit> <rounds>` | `1v1`, `battle`, `fight` | Duel another player | `coniccore.duel.*` |
-| `/spawn` | — | Teleport to spawn | `coniccore.spawn` |
-| `/stats [player]` | `statistic`, `statistics` | View player stats | `coniccore.stats` |
-| `/giveeditedkit <kit> <player>` | — | Give an edited kit | *(No specific node listed)* |
-| `/autoggtoggle` | — | Toggle AutoGG feature | `coniccore.autoggtoggle` |
+| `/conic` | `cc`, `coniccore` | Main admin command | `conicduels.admin` |
+| `/spawn` | — | Teleport to spawn | `conicduels.spawn` |
+| `/stats [player]` | `statistic`, `statistics` | View player stats | `conicduels.stats` |
+| `/autoggtoggle` | — | Toggle AutoGG feature | `conicduels.autoggtoggle` |
+| `/kit <create|delete|list|give|preview|rename|layouts>` | `kits`, `ck` | Kit management | `conicduels.kit` |
+| `/kiteditor <edit|save|leave|reset>` | — | Edit kits privately | `conicduels.kiteditor` |
+| `/arenas <create|pos1|pos2|center|list|teleport|delete|save|reset>` | — | Arena management | `conicduels.arenas.admin` |
+| `/party <create|disband|invite|leave|kick|info|chat|fight|promote|demote>` | `p` | Party management | `conicduels.party` |
+| `/duel <player>` | `1v1`, `battle`, `fight` | Duel another player | `conicduels.duel` |
+| `/partyaccept` | — | Accept party invite | `conicduels.party` |
+| `/partyfight` | — | Accept party fight | `conicduels.party` |
+| `/giveeditedkit <kit> <player>` | — | Give an edited kit | `conicduels.givekit` |
 
 ---
 
@@ -45,32 +47,38 @@ If you find some bugs, report them as soon as possible.
 
 | Permission | Description | Default |
 |------------|-------------|---------|
-| `coniccore.*` | Access to all ConicCore commands | `op` |
-| ├─ `coniccore.admin` | Access to all admin commands | `op` |
-| ├─ `coniccore.kit.*` | Access to all kit commands | `op` |
-| │ ├─ `coniccore.kit.create` | Create a kit | `op` |
-| │ ├─ `coniccore.kit.delete` | Delete a kit | `op` |
-| │ ├─ `coniccore.kit.list` | List all kits | `true` |
-| │ └─ `coniccore.kit.give` | Give a kit to a player | `op` |
-| ├─ `coniccore.party.*` | Access to all party commands | `op` |
-| │ ├─ `coniccore.party.create` | Create a party | `op` |
-| │ ├─ `coniccore.party.disband` | Disband a party | `op` |
-| │ ├─ `coniccore.party.invite` | Invite a player to party | `op` |
-| │ ├─ `coniccore.party.join` | Join a party | `op` |
-| │ ├─ `coniccore.party.leave` | Leave a party | `op` |
-| │ ├─ `coniccore.party.kick` | Kick a player from party | `op` |
-| │ ├─ `coniccore.party.info` | Party info | `op` |
-| │ ├─ `coniccore.party.chat` | Party chat | `op` |
-| │ └─ `coniccore.party.fight` | Party fight | `op` |
-| ├─ `coniccore.duel.*` | Access to all duel commands | `true` |
-| ├─ `coniccore.spawn` | Teleport to spawn | `true` |
-| ├─ `coniccore.stats` | View player stats | `true` |
-| └─ `coniccore.autoggtoggle` | Toggle AutoGG | `true` |
+| `conicduels.*` | Access to all ConicDuels commands | `op` |
+| ├─ `conicduels.admin` | Access to all admin commands (`/conic reload`, etc.) | `op` |
+| ├─ `conicduels.kit` | Access to kit management commands | `true` |
+| ├─ `conicduels.kiteditor` | Access to the kit editor | `true` |
+| ├─ `conicduels.givekit` | Give kits to other players | `op` |
+| ├─ `conicduels.arenas.admin` | Arena creation and management | `op` |
+| ├─ `conicduels.party` | Access to all party commands | `true` |
+| ├─ `conicduels.duel` | Access to all duel commands | `true` |
+| ├─ `conicduels.spawn` | Teleport to spawn | `true` |
+| ├─ `conicduels.stats` | View player stats | `true` |
+| ├─ `conicduels.autoggtoggle` | Toggle AutoGG | `true` |
+| ├─ `conicduels.spectate` | Spectate duels | `true` |
+| ├─ `conicduels.bypass.cooldown` | Bypass all cooldowns | `op` |
+| ├─ `conicduels.bypass.build` | Bypass build restrictions | `op` |
+| └─ `conicduels.bypass.break` | Bypass break restrictions | `op` |
+
+---
+
+## ⚙ Dependencies
+**Hard Dependency:**
+* ConicArena
+
+**Soft Dependencies (Required for Arena Management/Reset):**
+* FastAsyncWorldEdit **or** WorldEdit
 
 ---
 
 ## 📥 Installation
-1. Download the latest `ConicCore.jar` from [Modrinth](https://modrinth.com/plugin/conickits) or [GitHub Releases](https://github.com/SwarajDev5/ConicCore/releases).
-2. Place the jar into your server’s `/plugins` folder.
-3. Start your server to generate configuration files.
-4. Configure spawn and kit editing areas using:
+1. Download the latest **ConicDuels.jar** **and** **ConicArena.jar**.
+2. Place them in your server’s `/plugins` folder.
+3. Ensure you also have **FastAsyncWorldEdit** or **WorldEdit** installed for arena reset functionality.
+4. Start your server to generate configuration files.
+5. Configure spawn and kit editing areas using:
+   - `/conic setspawn`
+   - `/conic setediting`
